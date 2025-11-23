@@ -8,9 +8,9 @@ from transformers import AutoTokenizer, AutoModel
 st.title("🔍 URL Phishing Detector")
 
 # Load artifacts
-tfidf_path = "/content/drive/MyDrive/Colab Notebooks/Paul/tfidf_vectorizer.pkl"
-pca_path   = "/content/drive/MyDrive/Colab Notebooks/Paul/pca_roberta.pkl"
-model_path = "/content/drive/MyDrive/Colab Notebooks/Paul/best_hybrid_model.pkl"
+tfidf_path = "tfidf_vectorizer.pkl"
+pca_path   = "pca_roberta.pkl"
+model_path = "best_hybrid_model.pkl"
 
 vectorizer = joblib.load(tfidf_path)
 pca        = joblib.load(pca_path)
