@@ -97,3 +97,15 @@ if check_btn and url_input.strip():
                 st.success(f"✅ Safe: {url} appears legitimate! Probability: {prob*100:.0f}%")
         except Exception as e:
             st.warning(f"⚠️ {url} → Error: {e}")
+
+
+
+# Start Streamlit
+def run_streamlit():
+    os.system("streamlit run app.py")
+
+threading.Thread(target=run_streamlit, daemon=True).start()
+
+# ngrok tunnel via HTTP
+public_url = ngrok.connect(addr=8501, proto="http")
+print("Streamlit URL:", public_url)
