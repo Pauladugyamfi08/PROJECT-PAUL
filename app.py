@@ -16,10 +16,10 @@ vectorizer = joblib.load(tfidf_path)
 pca        = joblib.load(pca_path)
 clf        = joblib.load(model_path)
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-tokenizer = AutoTokenizer.from_pretrained("distilroberta-base")
-roberta_model = AutoModel.from_pretrained("distilroberta-base").to(device)
-roberta_model.eval()
+#device = "cuda" if torch.cuda.is_available() else "cpu"
+#tokenizer = AutoTokenizer.from_pretrained("distilroberta-base")
+#roberta_model = AutoModel.from_pretrained("distilroberta-base").to(device)
+#roberta_model.eval()
 
 # Helper functions
 SENSITIVE_WORDS = [
@@ -57,8 +57,8 @@ def predict_url(url: str):
     url_clean = clean_url(url)
     meta_feat = get_meta_features(url_clean).reshape(1, -1)
     tfidf_feat = vectorizer.transform([url_clean])
-    emb_feat = get_roberta_embedding(url_clean)
-    emb_feat_reduced = pca.transform(emb_feat)
+    #emb_feat = get_roberta_embedding(url_clean)
+    #emb_feat_reduced = pca.transform(emb_feat)
     final_feat = np.hstack([tfidf_feat.toarray(), emb_feat_reduced, meta_feat])
 
     pred_label = clf.predict(final_feat)[0]
@@ -101,11 +101,11 @@ if check_btn and url_input.strip():
 
 
 # Start Streamlit
-def run_streamlit():
-    os.system("streamlit run app.py")
+#def run_streamlit():
+    #os.system("streamlit run app.py")
 
-threading.Thread(target=run_streamlit, daemon=True).start()
+#threading.Thread(target=run_streamlit, daemon=True).start()
 
 # ngrok tunnel via HTTP
-public_url = ngrok.connect(addr=8501, proto="http")
-print("Streamlit URL:", public_url)
+#public_url = ngrok.connect(addr=8501, proto="http")
+#print("Streamlit URL:", public_url)
